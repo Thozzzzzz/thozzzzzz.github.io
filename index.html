@@ -32,37 +32,58 @@
       background-color: var(--dark-bg);
       color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 15px;
     }
 
     header {
-      background-color: none;
+      background-color: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(10px);
-      padding: 1rem 2rem;
-      position: static;
+      padding: 1rem;
+      position: relative;
       top: 0;
       left: 0;
       right: 0;
       margin: 0 auto;
-      z-index: 1;
+      z-index: 100;
       box-shadow: var(--box-shadow);
-      width: 90%;
-      max-width: 1100px;
-      border-radius: 10px;
-      transform-style: preserve-3d;
+      width: 100%;
+      max-width: 1400px;
+      border-radius: 0;
+    }
+
+    @media (min-width: 768px) {
+      header {
+        padding: 1rem 2rem;
+        width: 90%;
+        border-radius: 10px;
+      }
     }
 
     nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .logo {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--text-light);
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (min-width: 576px) {
+      .logo {
+        font-size: 2rem;
+      }
     }
 
     .logo span {
@@ -70,8 +91,25 @@
     }
 
     .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 1rem;
+      gap: 1rem;
+    }
+
+    .nav-links.active {
       display: flex;
-      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        margin-top: 0;
+        gap: 2rem;
+      }
     }
 
     .nav-links a {
@@ -79,6 +117,7 @@
       text-decoration: none;
       font-weight: 600;
       position: relative;
+      padding: 0.5rem;
     }
 
     .nav-links a::after {
@@ -96,6 +135,17 @@
       width: 100%;
     }
 
+    .social {
+      display: flex;
+      margin-left: 0.5px;
+    }
+
+    @media (max-width: 767px) {
+      .social {
+        margin-right: 40px;
+      }
+    }
+
     .social-btn {
       color: var(--text-light);
       font-size: 1.4rem;
@@ -108,20 +158,43 @@
       transform: scale(1.2);
     }
 
+    .menu-toggle {
+      display: block;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
     .hero {
-      min-height: 100vh;
+      min-height: 80vh;
       display: flex;
       align-items: center;
       justify-content: center;
       background: var(--dark-bg);
       text-align: center;
-      padding: 5rem 0;
+      padding: 3rem 0;
       perspective: 1000px;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding: 5rem 0;
+      }
     }
 
     .hero-content {
       transform-style: preserve-3d;
       animation: float 6s ease-in-out infinite;
+      padding: 0 15px;
     }
 
     @keyframes float {
@@ -130,9 +203,21 @@
     }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
       text-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    }
+
+    @media (min-width: 576px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
     }
 
     .hero h1 span {
@@ -142,21 +227,35 @@
     .hero p {
       max-width: 700px;
       margin: 0 auto;
-      font-size: 1.1rem;
+      font-size: 1rem;
       opacity: 0.85;
+      padding: 0 15px;
+    }
+
+    @media (min-width: 576px) {
+      .hero p {
+        font-size: 1.1rem;
+      }
     }
 
     .discord-btn {
       background: var(--primary-color);
       color: #fff;
-      padding: 12px 30px;
+      padding: 10px 20px;
       border: none;
       border-radius: 50px;
       font-weight: bold;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       display: inline-block;
       text-decoration: none;
       box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+
+    @media (min-width: 576px) {
+      .discord-btn {
+        padding: 12px 30px;
+        margin-top: 2rem;
+      }
     }
 
     .discord-btn:hover {
@@ -165,30 +264,61 @@
     }
 
     .gallery-section {
-      padding: 4rem 2rem;
+      padding: 2rem 15px;
       text-align: center;
       background-color: var(--dark-bg);
     }
 
+    @media (min-width: 768px) {
+      .gallery-section {
+        padding: 4rem 2rem;
+      }
+    }
+
     .gallery-section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
       color: var(--primary-color);
+    }
+
+    @media (min-width: 576px) {
+      .gallery-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
     }
 
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      gap: 1rem;
+    }
+
+    @media (min-width: 576px) {
+      .gallery-grid {
+        gap: 1.5rem;
+      }
     }
 
     .gallery-grid img {
       width: 100%;
-      height: 500px;
+      height: 250px;
       object-fit: cover;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @media (min-width: 576px) {
+      .gallery-grid img {
+        height: 350px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .gallery-grid img {
+        height: 500px;
+      }
     }
 
     .gallery-grid img:hover {
@@ -197,121 +327,109 @@
     }
 
     .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
 
     .modal img {
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
-        object-fit: contain;
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      object-fit: contain;
     }
 
     .modal .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 2rem;
-        color: var(--text-light);
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.3s ease;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2rem;
+      color: var(--text-light);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
     .modal .close-btn:hover {
-        transform: scale(1.2);
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: 0.4s;
-        border-radius: 34px;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        border-radius: 50%;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-    }
-
-    input:checked + .slider {
-        background-color: var(--primary-color);
-    }
-
-    input:checked + .slider:before {
-        transform: translateX(26px);
-    }
-
-    .toggle-label {
-        margin-left: 10px;
-        color: var(--text-light);
-        font-weight: 600;
+      transform: scale(1.2);
     }
 
     .rules-teaser {
-      background-color: var(--dark-bg);
+      background-color: none;
       border-radius: var(--border-radius);
-      padding: 2rem;
+      padding: 1.5rem;
       text-align: center;
-      margin-top: 3rem;
+      margin: 2rem 15px 0;
+    }
+
+    @media (min-width: 768px) {
+      .rules-teaser {
+        padding: 2rem;
+        margin-top: 3rem;
+      }
     }
 
     .rules-teaser h3 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       margin-bottom: 1rem;
     }
 
+    @media (min-width: 576px) {
+      .rules-teaser h3 {
+        font-size: 1.8rem;
+      }
+    }
+
     .rules-teaser p {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 576px) {
+      .rules-teaser p {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
 
     footer {
       background: var(--dark-bg);
       color: var(--text-light);
-      padding: 3rem 0;
+      padding: 2rem 15px;
+    }
+
+    @media (min-width: 768px) {
+      footer {
+        padding: 3rem 0;
+      }
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
       margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 576px) {
+      .footer-links {
+        gap: 2rem;
+      }
     }
 
     .footer-links a {
@@ -339,31 +457,31 @@
     }
 
     .bg-3d {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%;
-        height: 100%;
-        z-index: -1;
-        opacity: 0.1;
-        transform-style: preserve-3d;
-        perspective: 1000px;
-        overflow: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      overflow: hidden;
     }
 
     .enable-3d {
-        transform-style: preserve-3d;
-        perspective: 1000px;
-        transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 0.3s ease;
     }
 
     .enable-3d img {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .enable-3d img:hover {
-        transform: scale(1.05) rotateX(2deg) rotateY(2deg);
-        box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+      transform: scale(1.05) rotateX(2deg) rotateY(2deg);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
     }
 
     .light-mode {
@@ -384,10 +502,17 @@
       background: var(--primary-color);
       color: white;
       border: none;
-      padding: 0.6rem 1rem;
+      padding: 0.5rem;
       border-radius: 8px;
       cursor: pointer;
       box-shadow: var(--box-shadow);
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 576px) {
+      .theme-toggle {
+        padding: 0.6rem 1rem;
+      }
     }
   </style>
 </head>
@@ -396,7 +521,10 @@
     <div class="container">
       <nav>
         <div class="logo">SERVEUR<span>RP</span></div>
-        <div class="nav-links">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
           <a href="#accueil">🏚️ Accueil</a>
           <a href="reglement.html">📃 Règlement</a>
           <a href="#contact">📧 Contact</a>
@@ -423,23 +551,25 @@
   <section class="gallery-section">
     <h2>Galerie du Serveur</h2>
     <div class="gallery-grid">
-      <img src="1.jpg" alt="Aperçu Serveur RP 1">
-      <img src="2.jpg" alt="Aperçu Serveur RP 2">
-      <img src="3.jpg" alt="Aperçu Serveur RP 3">
-      <img src="4.jpg" alt="Aperçu Serveur RP 4">
+      <img src="img/1.jpg" alt="Aperçu Serveur RP 1">
+      <img src="img/2.jpg" alt="Aperçu Serveur RP 2">
+      <img src="img/3.jpg" alt="Aperçu Serveur RP 3">
+      <img src="img/4.jpg" alt="Aperçu Serveur RP 4">
     </div>
     <div id="imageModal" class="modal">
-        <button class="close-btn" id="closeModalBtn">&times;</button>
-        <img id="modalImage" src="" alt="Image agrandie">
+      <button class="close-btn" id="closeModalBtn">&times;</button>
+      <img id="modalImage" src="" alt="Image agrandie">
     </div>
   </section>
   
   <section class="rules-teaser">
     <h3>Consultez notre règlement complet</h3>
     <p>Pour assurer une expérience RP de qualité, nous avons établi un ensemble de règles détaillées. Prenez le temps de les consulter avant de rejoindre notre serveur.</p>
-    <a href="reglement.html" class="discord-btn">📃 Reglement</a>
-    <a href="https://discord.gg/kp9Me4kfne" class="discord-btn"><i class="fab fa-discord"></i></a>
-    <a href="#" class="discord-btn">🎮</a>
+    <div class="buttons-container">
+      <a href="reglement.html" class="discord-btn">📃 Reglement</a>
+      <a href="https://discord.gg/kp9Me4kfne" class="discord-btn"><i class="fab fa-discord"></i></a>
+      <a href="#" class="discord-btn">🎮</a>
+    </div>
   </section>
 
   <footer>
@@ -478,6 +608,19 @@
           header.nextElementSibling?.classList.toggle('active');
         });
       });
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          menuToggle.innerHTML = navLinks.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+        });
+      }
     });
 
     function toggleTheme() {
@@ -485,26 +628,27 @@
       const isLight = document.body.classList.contains("light-mode");
       localStorage.setItem("theme", isLight ? "light" : "dark");
     }
+    
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const galleryImages = document.querySelectorAll('.gallery-grid img');
 
     galleryImages.forEach(image => {
-        image.addEventListener('click', function () {
+      image.addEventListener('click', function () {
         modal.style.display = 'flex';
         modalImage.src = this.src;
-        });
+      });
     });
 
     closeModalBtn.addEventListener('click', function () {
-        modal.style.display = 'none';
+      modal.style.display = 'none';
     });
 
     modal.addEventListener('click', function (e) {
-        if (e.target === modal) {
+      if (e.target === modal) {
         modal.style.display = 'none';
-        }
+      }
     });
   </script>  
 </body>
