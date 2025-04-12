@@ -43,10 +43,12 @@
         
         /* Header */
         header {
-            background-color: var(--dark-bg);
+            background-color: none;
             padding: 1rem 2rem;
-            position: sticky;
+            position: static;
             top: 10px;
+            left: 0;
+            right: 0;
             z-index: 1000;
             box-shadow: var(--box-shadow);
             width: 90%;
@@ -124,7 +126,6 @@
             padding: 5rem 0;
             text-align: center;
             color: var(--text-light);
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
         }
         
         .banner h1 {
@@ -364,6 +365,83 @@
                 gap: 1.5rem;
             }
         }
+        
+        .light-mode {
+            --dark-bg: #f5f5f5;
+            --light-bg: #ffffff;
+            --text-light: #000000;
+            --text-dark: #000000;
+            --border-color: #000000;
+            background-color: var(--dark-bg);
+            color: var(--text-dark);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1001;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+        }
+
+        mark {
+            background: #b00000;
+            color: #000;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .rule-item {
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .rule-item:hover {
+            background-color: rgba(0, 0, 0, 0.09);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faq {
+            margin-top: 3rem;
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .faq h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        details {
+            margin-bottom: 1rem;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        details[open] summary {
+            color: var(--primary-color);
+        }
     </style>        
 </head>
 <body>
@@ -374,9 +452,9 @@
                     SERVEUR<span>RP</span>
                 </div>
                 <div class="nav-links">
-                    <a href="index.html">Accueil</a>
-                    <a href="reglement.html">Règlement</a>
-                    <a href="index.html#contact">Contact</a>
+                    <a href="index.html">🏚️ Accueil</a>
+                    <a href="reglement.html">📃 Règlement</a>
+                    <a href="index.html#contact">📧 Contact</a>
                 </div>
                 <div class="social-links">
                     <a href="https://discord.gg/kp9Me4kfne" class="social-btn" target="_blank"><i class="fab fa-discord"></i></a>
@@ -386,12 +464,28 @@
             </nav>
         </div>
     </header>
-    
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Thème</button>
     <section class="banner">
         <div class="container">
             <h1>Règlement du <span>SERVEUR RP</span></h1>
             <p>Consultez notre règlement complet pour comprendre le fonctionnement de notre serveur et assurer une expérience RP de qualité pour tous les joueurs.</p>
         </div>
+    </section>
+
+    <section class="faq container">
+        <h2>❓ Questions Fréquentes</h2>
+        <details>
+          <summary>Que signifie "FearRP" ?</summary>
+          <p>Le FearRP signifie que votre personnage doit avoir peur pour sa vie et agir de manière réaliste face au danger.</p>
+        </details>
+        <details>
+          <summary>Est-ce que je peux utiliser plusieurs comptes ?</summary>
+          <p>Non. Les comptes multiples sont interdits. Vous devez jouer avec un seul compte.</p>
+        </details>
+        <details>
+          <summary>Puis-je ignorer une décision du staff ?</summary>
+          <p>Les décisions du staff doivent être respectées. Utilisez la procédure d’appel si nécessaire.</p>
+        </details>
     </section>
     
     <div class="container">
@@ -405,7 +499,7 @@
                 <div class="categories-menu">
                     <div class="category-item">
                         <div class="category-header active" data-category="general">
-                            <span>Règles Générales</span>
+                            <span>🤷‍♂️ Règles Générales</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="subcategories active">
@@ -417,7 +511,7 @@
                     
                     <div class="category-item">
                         <div class="category-header" data-category="roleplay">
-                            <span>Règles Roleplay</span>
+                            <span>🖱️ Règles Roleplay</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="subcategories">
@@ -429,7 +523,7 @@
                     
                     <div class="category-item">
                         <div class="category-header" data-category="jobs">
-                            <span>Règles des Métiers</span>
+                            <span>💼 Règles des Métiers</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="subcategories">
@@ -441,7 +535,7 @@
                     
                     <div class="category-item">
                         <div class="category-header" data-category="sanctions">
-                            <span>Sanctions</span>
+                            <span>🚨 Sanctions</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="subcategories">
@@ -456,7 +550,7 @@
                 <!-- Règles Générales -->
                 <div class="rule-category" id="general">
                     <div class="rule-category-header">
-                        <h2>Règles Générales</h2>
+                        <h2>🤷‍♂️ Règles Générales</h2>
                     </div>
                     
                     <div class="rule-subcategory" id="general-respect">
@@ -520,7 +614,7 @@
                 <!-- Règles Roleplay -->
                 <div class="rule-category" id="roleplay">
                     <div class="rule-category-header">
-                        <h2>Règles Roleplay</h2>
+                        <h2>🖱️ Règles Roleplay</h2>
                     </div>
                     
                     <div class="rule-subcategory" id="rp-bases">
@@ -589,7 +683,7 @@
                 <!-- Règles des Métiers -->
                 <div class="rule-category" id="jobs">
                     <div class="rule-category-header">
-                        <h2>Règles des Métiers</h2>
+                        <h2>💼 Règles des Métiers</h2>
                     </div>
                     
                     <div class="rule-subcategory" id="jobs-legaux">
@@ -653,7 +747,7 @@
                 <!-- Sanctions -->
                 <div class="rule-category" id="sanctions">
                     <div class="rule-category-header">
-                        <h2>Sanctions</h2>
+                        <h2>🚨 Sanctions</h2>
                     </div>
                     
                     <div class="rule-subcategory" id="sanctions-types">
@@ -700,9 +794,10 @@
                     SERVEUR<span>RP</span>
                 </div>
                 <div class="footer-links">
-                    <a href="index.html">Accueil</a>
-                    <a href="reglement.html">Règlement</a>
-                    <a href="https://discord.gg/kp9Me4kfne" target="_blank">Discord</a>
+                    <a href="index.html">🏚️ Accueil</a>
+                    <a href="reglement.html">📃 Règlement</a>
+                    <a href="index.html#contact" target="_blank">📧 Contact</a>
+                    <a href="https://discord.gg/kp9Me4kfne" target="_blank"><i class="fab fa-discord"></i></a>
                 </div>
                 <p>© 2025 Serveur RP. Tous droits reservés.</p>
             </div>
@@ -710,61 +805,70 @@
     </footer>
 
     <script>
-    document.querySelectorAll('.category-header').forEach(header => {
-        header.addEventListener('click', () => {
-            document.querySelectorAll('.category-header').forEach(h => {
+        document.addEventListener("DOMContentLoaded", () => {
+          const savedTheme = localStorage.getItem("theme");
+          if (savedTheme === "light") document.body.classList.add("light-mode");
+    
+          document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', () => {
+              document.querySelectorAll('.category-header').forEach(h => {
                 if (h !== header) {
-                    h.classList.remove('active');
-                    h.nextElementSibling.classList.remove('active');
+                  h.classList.remove('active');
+                  h.nextElementSibling?.classList.remove('active');
                 }
+              });
+              header.classList.toggle('active');
+              header.nextElementSibling?.classList.toggle('active');
             });
-
-            header.classList.toggle('active');
-            const subcategories = header.nextElementSibling;
-            if (subcategories) {
-                subcategories.classList.toggle('active');
-            }
-        });
-    });
-
-    document.querySelectorAll('.subcategory-link').forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            document.querySelectorAll('.subcategory-link').forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
-            const targetId = link.getAttribute('href');
-            const target = document.querySelector(targetId);
-
-            if (target) {
-                const elementTop = target.getBoundingClientRect().top + window.pageYOffset;
-                const elementHeight = target.offsetHeight;
-                const viewportHeight = window.innerHeight;
-                const scrollTo = elementTop - (viewportHeight / 2) + (elementHeight / 2);
-
-                window.scrollTo({
-                    top: scrollTo,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-
-        function filterRules() {
+          });
+    
+          document.querySelectorAll('.subcategory-link').forEach(link => {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+              document.querySelectorAll('.subcategory-link').forEach(l => l.classList.remove('active'));
+              link.classList.add('active');
+    
+              const targetId = link.getAttribute('href');
+              const target = document.querySelector(targetId);
+              if (target) {
+                const offset = target.getBoundingClientRect().top + window.pageYOffset;
+                const scroll = offset - (window.innerHeight / 2) + (target.offsetHeight / 2);
+                window.scrollTo({ top: scroll, behavior: 'smooth' });
+              }
+            });
+          });
+    
+          const searchInput = document.getElementById('searchInput');
+          const searchBtn = document.getElementById('searchBtn');
+    
+          function highlightSearch(term) {
+            document.querySelectorAll('.rule-item').forEach(rule => {
+              rule.innerHTML = rule.innerHTML.replace(/<mark>|<\/mark>/g, '');
+              if (term.length > 1) {
+                const regex = new RegExp(`(${term})`, 'gi');
+                rule.innerHTML = rule.innerHTML.replace(regex, '<mark>$1</mark>');
+              }
+            });
+          }
+    
+          function filterRules() {
             const value = searchInput.value.toLowerCase();
             const rules = document.querySelectorAll('.rule-item');
-
             rules.forEach(rule => {
-                const text = rule.innerText.toLowerCase();
-                rule.style.display = text.includes(value) ? 'block' : 'none';
+              const text = rule.textContent.toLowerCase();
+              rule.style.display = text.includes(value) ? 'block' : 'none';
             });
+            highlightSearch(value);
+          }
+    
+          searchBtn?.addEventListener('click', filterRules);
+          searchInput?.addEventListener('input', filterRules);
+        });
+    
+        function toggleTheme() {
+          document.body.classList.toggle("light-mode");
+          const isLight = document.body.classList.contains("light-mode");
+          localStorage.setItem("theme", isLight ? "light" : "dark");
         }
-
-        searchBtn.addEventListener('click', filterRules);
-        searchInput.addEventListener('input', filterRules);
-    </script>   
+    </script>
 </body>
