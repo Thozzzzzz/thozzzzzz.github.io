@@ -1,822 +1,461 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Développement FiveM Premium</title>
-    <style>
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --red: hwb(0 0% 31%);
-            --gray: #333333;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background-color: var(--black);
-            color: var(--white);
-            overflow-x: hidden;
-            perspective: 1500px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            padding: 20px 0;
-            position: fixed;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            border-radius: 5%;
-            top: 10px;
-            z-index: 100;
-            background-color: none;
-            backdrop-filter: blur(10px);
-            transform-style: preserve-3d;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover {
-            transform: translateZ(20px);
-        }
-        
-        .logo span {
-            color: var(--red);
-            position: relative;
-            display: inline-block;
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover span {
-            transform: translateZ(30px) translateX(5px);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--red);
-            transition: 0.3s;
-            transform: translateZ(5px);
-        }
-        
-        .nav-links a:hover {
-            transform: translateZ(15px);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SERVEUR RP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #b00000;
+      --primary-dark: #800000;
+      --secondary-color: #ffffff;
+      --dark-bg: #000000;
+      --light-bg: rgba(8, 8, 8, 0.9);
+      --text-light: #ffffff;
+      --text-dark: #ffffff;
+      --border-color: #ffffff;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s ease;
+    }
 
-        .discord-btn {
-            background-color: var(--red);
-            color: var(--white);
-            padding: 10px 25px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            transform-style: preserve-3d;
-            box-shadow: 0 5px 15px rgba(175, 0, 0, 0.3);
-            overflow: hidden;
-        }
-        
-        .discord-btn:hover {
-            transform: translateY(-3px) translateZ(20px);
-            box-shadow: 0 15px 30px rgba(175, 0, 0, 0.5);
-        }
-        
-        .discord-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-        
-        .discord-btn:hover::before {
-            transform: translateX(100%);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+    }
 
-        .discordnav-btn, .youtube-btn, .tiktok-btn {
-            background-color: var(--red);
-            color: var(--white);
-            padding: 10px 15px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            transform-style: preserve-3d;
-            box-shadow: 0 5px 10px rgba(175, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        .discordnav-btn:hover, .youtube-btn:hover, .tiktok-btn:hover {
-            transform: translateY(-3px) translateZ(15px);
-            box-shadow: 0 10px 20px rgba(175, 0, 0, 0.3);
-        }
-        
-        .discordnav-btn::before, .youtube-btn::before, .tiktok-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-        
-        .discordnav-btn:hover::before, .youtube-btn:hover::before, .tiktok-btn:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .youtube-btn {
-            margin-left: -330px;
-        }
-        
-        .tiktok-btn {
-            margin-left: -330px;
-        }
-        
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background-color: var(--red);
-            opacity: 0.10;
-            z-index: -1;
-            transform: translateZ(-20px);
-            filter: blur(40px);
-            animation: float 15s infinite ease-in-out;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -200px;
-            left: -200px;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background-color: var(--red);
-            opacity: 0.10;
-            z-index: -1;
-            transform: translateZ(-30px);
-            filter: blur(60px);
-            animation: float 20s infinite ease-in-out reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateZ(-20px) translate(0, 0);
-            }
-            25% {
-                transform: translateZ(-20px) translate(50px, 50px);
-            }
-            50% {
-                transform: translateZ(-20px) translate(0, 100px);
-            }
-            75% {
-                transform: translateZ(-20px) translate(-50px, 50px);
-            }
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            transform-style: preserve-3d;
-            animation: fadeIn 1s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hero h1 {
-            font-size: 60px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            transform-style: preserve-3d;
-            position: relative;
-        }
-        
-        .hero h1 span {
-            color: var(--red);
-            display: inline-block;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: pulse 5s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(175, 0, 0, 0.5);
-            }
-            50% {
-                text-shadow: 0 0 20px rgba(175, 0, 0, 0.8), 0 0 30px rgba(175, 0, 0, 0.5);
-            }
-        }
-        
-        .hero p {
-            font-size: 18px;
-            color: #b0b0b0;
-            margin-bottom: 40px;
-            line-height: 1.6;
-            transform-style: preserve-3d;
-            position: relative;
-            transform: translateZ(10px);
-        }
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
 
-        .bg-3d {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            overflow: hidden;
-        }
-        
-        .grid {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(rgba(175, 0, 0, 0.3) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(175, 0, 0, 0.3) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: rotateX(60deg) rotateZ(-45deg) translateZ(-100px);
-            animation: grid-move 20s linear infinite;
-        }
-        
-        @keyframes grid-move {
-            from { transform: rotateX(60deg) rotateZ(-45deg) translateZ(-100px) translateY(0); }
-            to { transform: rotateX(60deg) rotateZ(-45deg) translateZ(-100px) translateY(40px); }
-        }
-        
-        .services {
-            padding: 120px 0;
-            background-color: #000000;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-        
-        .services::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background-color: var(--black);
-            clip-path: ellipse(50% 60px at 50% 0%);
-            z-index: 1;
-        }
-        
-        .services::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background-color: var(--black);
-            clip-path: ellipse(50% 60px at 50% 100%);
-            z-index: 1;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-            z-index: 2;
-            transform-style: preserve-3d;
-        }
-        
-        .section-title h2 {
-            font-size: 40px;
-            margin-bottom: 15px;
-            transform: translateZ(20px);
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-        
-        .section-title h2 span {
-            color: var(--red);
-            position: relative;
-            display: inline-block;
-            animation: glow 3s infinite alternate;
-        }
-        
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 5px rgba(175, 0, 0, 0.5);
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(175, 0, 0, 0.8), 0 0 30px rgba(175, 0, 0, 0.6);
-            }
-        }
-        
-        .section-title p {
-            color: #b0b0b0;
-            max-width: 600px;
-            margin: 0 auto;
-            transform: translateZ(10px);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            position: relative;
-            z-index: 2;
-            transform-style: preserve-3d;
-        }
-        
-        .service-card {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
-            transform-style: preserve-3d;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(175, 0, 0, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transform: rotate(30deg);
-            transition: all 0.5s ease;
-            z-index: -1;
-        }
-        
-        .service-card:hover::before {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px) translateZ(20px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(175, 0, 0, 0.3);
-        }
-        
-        .service-card i {
-            font-size: 50px;
-            color: var(--red);
-            margin-bottom: 20px;
-            display: block;
-            transition: transform 0.5s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .service-card:hover i {
-            transform: translateZ(30px) scale(1.1);
-            animation: iconFloat 2s ease-in-out infinite;
-        }
-        
-        @keyframes iconFloat {
-            0%, 100% {
-                transform: translateZ(30px) translateY(0);
-            }
-            50% {
-                transform: translateZ(30px) translateY(-10px);
-            }
-        }
-        
-        .service-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            position: relative;
-            transition: transform 0.4s ease;
-        }
-        
-        .service-card:hover h3 {
-            transform: translateZ(20px);
-        }
-        
-        .service-card p {
-            color: #b0b0b0;
-            line-height: 1.6;
-            transition: transform 0.4s ease;
-        }
-        
-        .service-card:hover p {
-            transform: translateZ(15px);
-        }
-        
-        .cta {
-            padding: 100px 0;
-            text-align: center;
-            background-color: var(--black);
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-        
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 300px;
-            background-color: var(--red);
-            filter: blur(150px);
-            opacity: 0.1;
-            z-index: 0;
-            animation: pulseBg 10s infinite alternate;
-        }
-        
-        @keyframes pulseBg {
-            0% {
-                opacity: 0.05;
-                transform: translateZ(-50px) scale(0.8);
-            }
-            100% {
-                opacity: 0.15;
-                transform: translateZ(-50px) scale(1.2);
-            }
-        }
-        
-        .cta h2 {
-            font-size: 40px;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            transform: translateZ(20px);
-        }
-        
-        .cta p {
-            font-size: 18px;
-            color: #b0b0b0;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-            transform: translateZ(10px);
-        }
-        
-        footer {
-            background-color: #000000;
-            padding: 60px 0 30px;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 50px;
-            transform-style: preserve-3d;
-        }
-        
-        .footer-col {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 30px;
-            transform-style: preserve-3d;
-            transform: translateZ(10px);
-        }
-        
-        .footer-col h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-            transform: translateZ(5px);
-        }
-        
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--red);
-            transform: translateZ(2px);
-        }
-        
-        .footer-col p {
-            color: #b0b0b0;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            transform-style: preserve-3d;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            color: var(--white);
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-            position: relative;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--red);
-            transform: translateY(-3px) translateZ(20px);
-            box-shadow: 0 10px 20px rgba(175, 0, 0, 0.3);
-        }
-        
-        .social-links a i {
-            transition: transform 0.3s ease;
-        }
-        
-        .social-links a:hover i {
-            transform: scale(1.2);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            transform: translateZ(5px);
-        }
-        
-        .footer-bottom p {
-            color: #777;
-            font-size: 14px;
-        }
-        
-        .parallax-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            pointer-events: none;
-        }
-        
-        .parallax-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .section-title h2 {
-                font-size: 32px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    header {
+        background-color: none;
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        box-shadow: var(--box-shadow);
+        width: 90%;
+        max-width: 1100px;
+        border-radius: 10px;
+        transform-style: preserve-3d;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-light);
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo span {
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .social-btn {
+      color: var(--text-light);
+      font-size: 1.4rem;
+      margin-left: 1rem;
+      transition: transform 0.3s;
+    }
+
+    .social-btn:hover {
+      color: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark-bg);
+      text-align: center;
+      padding: 5rem 0;
+      perspective: 1000px;
+    }
+
+    .hero-content {
+      transform-style: preserve-3d;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateX(0deg); }
+      50% { transform: translateY(-10px) rotateX(5deg); }
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    }
+
+    .hero h1 span {
+      color: var(--primary-color);
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    .discord-btn {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      margin-top: 2rem;
+      display: inline-block;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+
+    .discord-btn:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    .gallery-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: var(--dark-bg);
+    }
+
+    .gallery-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05) rotateX(2deg);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        object-fit: contain;
+    }
+
+    .modal .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 2rem;
+        color: var(--text-light);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .modal .close-btn:hover {
+        transform: scale(1.2);
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+    }
+
+    input:checked + .slider {
+        background-color: var(--primary-color);
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+    .toggle-label {
+        margin-left: 10px;
+        color: var(--text-light);
+        font-weight: 600;
+    }
+
+    .rules-teaser {
+      background-color: var(--dark-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .rules-teaser h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .rules-teaser p {
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      background: var(--dark-bg);
+      color: var(--text-light);
+      padding: 3rem 0;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-social {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-social a {
+      margin: 0 10px;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    .bg-3d {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        overflow: hidden;
+    }
+
+    .enable-3d {
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        transition: transform 0.3s ease;
+    }
+
+    .enable-3d img {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .enable-3d img:hover {
+        transform: scale(1.05) rotateX(2deg) rotateY(2deg);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    AD<span>DEV</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#accueil">Accueil</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <a href="https://discord.gg/kp9Me4kfne" class="discordnav-btn"><i class="fab fa-discord"></i></a>
-                <a href="https://youtube.com/@darkanvg1343?si=JlSYQirK9qPHMqDB" class="youtube-btn"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@ad.dev7" class="tiktok-btn"><i class="fab fa-tiktok"></i></a>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">SERVEUR<span>RP</span></div>
+        <div class="nav-links">
+          <a href="#accueil">Accueil</a>
+          <a href="reglement.html">Règlement</a>
+          <a href="#contact">Contact</a>
         </div>
-    </header>
-    
-    <section class="hero" id="accueil">
-        <div class="bg-3d">
-            <div class="grid"></div>
+        <div class="social">
+          <a href="https://discord.gg/kp9Me4kfne" class="social-btn"><i class="fab fa-discord"></i></a>
+          <a href="https://youtube.com/@darkanvg1343" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.tiktok.com/@ad.dev7" class="social-btn"><i class="fab fa-tiktok"></i></a>
         </div>
-        <div class="container">
-            <div class="hero-content">
-                <h1>Solutions de développement <span>FiveM</span> sur mesure</h1>
-                <p>Transformez votre serveur avec des scripts personnalisés, des systèmes avancés et des interfaces modernes. Des solutions professionnelles pour une expérience de jeu exceptionnelle.</p>
-                <a href="https://discord.gg/kp9Me4kfne" class="discord-btn">Rejoindre notre Discord</a>
-            </div>
-        </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Nos <span>Services</span></h2>
-                <p>Découvrez notre gamme complète de services de développement pour votre serveur FiveM</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Scripts Personnalisés</h3>
-                    <p>Développement de scripts sur mesure adaptés aux besoins spécifiques de votre serveur.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-paint-brush"></i>
-                    <h3>Interface Utilisateur</h3>
-                    <p>Création d'interfaces modernes et intuitives pour améliorer l'expérience de vos joueurs.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Optimisation</h3>
-                    <p>Amélioration des performances de votre serveur pour une expérience de jeu fluide.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-map"></i>
-                    <h3>Mapping</h3>
-                    <p>Création d'environnements personnalisés pour rendre votre serveur unique.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Systèmes de Jobs</h3>
-                    <p>Implémentation de systèmes de métiers avancés et personnalisables.</p>
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>Support Technique</h3>
-                    <p>Assistance et maintenance continue pour assurer le bon fonctionnement de vos systèmes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      </nav>
+    </div>
+  </header>
 
-    <section class="cta" id="discord">
-        <div class="container">
-            <h2>Prêt à améliorer votre serveur ?</h2>
-            <p>Rejoignez notre Discord pour découvrir nos produits, demander un devis personnalisé et discuter avec notre équipe de développeurs.</p>
-            <a href="https://discord.gg/kp9Me4kfne" class="discord-btn"><i class="fab fa-discord"></i> Rejoindre Discord</a>
-        </div>
-    </section>
-    
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>À Propos</h3>
-                    <p>Nous sommes une équipe de développeurs passionnés spécialisés dans la création de solutions premium pour FiveM. Notre objectif est de vous aider à créer une expérience de jeu unique et immersive.</p>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Contact</h3>
-                    <p>Pour toute question ou demande de devis, n'hésitez pas à nous contacter sur notre serveur Discord.</p>
-                    <div class="social-links">
-                        <a href="https://discord.gg/kp9Me4kfne"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@ad.dev7"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://youtube.com/@darkanvg1343?si=JlSYQirK9qPHMqDB"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 ADDEV. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        document.addEventListener('mousemove', function(e) {
-            const depth = 5;
-            const moveX = ((window.innerWidth / 2) - e.clientX) / depth;
-            const moveY = ((window.innerHeight / 2) - e.clientY) / depth;
+  <section class="hero" id="accueil">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Bienvenue sur <span>SERVEUR RP</span></h1>
+        <p>Consultez notre règlement et notre lexique pour vous familiariser avec notre serveur et profiter pleinement de votre expérience RP.</p>
+        <a href="reglement.html" class="discord-btn">Consulter le règlement</a>
+      </div>
+    </div>
+  </section>
 
-            document.querySelectorAll('.hero-content').forEach(element => {
-                element.style.transform = `translateX(${moveX/4}px) translateY(${moveY/4}px)`;
-            });
-            
-            document.querySelectorAll('.service-card').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const cardX = rect.left + rect.width / 2;
-                const cardY = rect.top + rect.height / 2;
-                
-                const distanceX = (cardX - e.clientX) / 20;
-                const distanceY = (cardY - e.clientY) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateY(${-distanceX}deg) rotateX(${distanceY}deg) translateZ(10px)`;
-            });
+  <section class="gallery-section">
+    <h2>Galerie du Serveur</h2>
+    <div class="gallery-grid">
+      <img src="img/1.jpg" alt="Aperçu Serveur RP 1">
+      <img src="img/2.jpg" alt="Aperçu Serveur RP 2">
+      <img src="img/3.jpg" alt="Aperçu Serveur RP 3">
+      <img src="img/4.jpg" alt="Aperçu Serveur RP 4">
+    </div>
+    <div id="imageModal" class="modal">
+        <button class="close-btn" id="closeModalBtn">&times;</button>
+        <img id="modalImage" src="" alt="Image agrandie">
+    </div>
+  </section>
+  
+  <section class="rules-teaser">
+    <h3>Consultez notre règlement complet</h3>
+    <p>Pour assurer une expérience RP de qualité, nous avons établi un ensemble de règles détaillées. Prenez le temps de les consulter avant de rejoindre notre serveur.</p>
+    <a href="reglement.html" class="discord-btn">Voir le règlement</a>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#accueil">Accueil</a>
+        <a href="reglement.html">Règlement</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://discord.gg/kp9Me4kfne" class="social-btn" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://youtube.com/@darkanvg1343" class="social-btn" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@ad.dev7" class="social-btn" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2025 SERVEUR RP. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const galleryImages = document.querySelectorAll('.gallery-grid img');
+
+    galleryImages.forEach(image => {
+        image.addEventListener('click', function () {
+        modal.style.display = 'flex';
+        modalImage.src = this.src;
         });
+    });
 
-        document.addEventListener('mouseleave', function() {
-            document.querySelectorAll('.hero-content, .service-card').forEach(element => {
-                element.style.transform = 'translateX(0) translateY(0)';
-            });
-            
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateZ(10px)';
-            });
-        });
-    </script>
+    closeModalBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+        modal.style.display = 'none';
+        }
+    });
+  </script>  
 </body>
 </html>
