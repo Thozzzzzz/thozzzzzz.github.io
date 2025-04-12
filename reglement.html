@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règlement - SERVEUR RP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #b00000;
+            --primary-dark: #b00000;
+            --secondary-color: #ffffff;
+            --dark-bg: #000000;
+            --light-bg: rgba(8, 8, 8, 0.9);
+            --text-light: #ffffff;
+            --text-dark: #ffffff;
+            --border-color: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--dark-bg);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 10px;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+            border-bottom: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Social icons */
+        .social-btn {
+            color: var(--text-light);
+            font-size: 1.4rem;
+            margin-left: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+        
+        /* Banner */
+        .banner {
+            background: var(--dark-bg);
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 0;
+            text-align: center;
+            color: var(--text-light);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+        }
+        
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .banner span {
+            color: var(--primary-color);
+        }
+        
+        .banner p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+        
+        /* Search */
+        .search-container {
+            margin: 2rem auto;
+            max-width: 600px;
+            display: flex;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            outline: none;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background-color: var(--light-bg);
+            color: var(--text-light);
+            outline: none;
+        }
+        
+        .search-btn {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .search-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Rules Layout */
+        .rules-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            position: sticky;
+            top: 50px;
+            height: 500px;
+            transition: var(--transition);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-light);
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: #141414;
+            border-radius: 8px;
+            margin-bottom: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .category-header:hover {
+            background-color: #0e0d0d;
+            box-shadow: 0 0 10px rgba(255, 60, 60, 0.3);
+            transform: scale(1.02);
+        }
+
+        .category-header.active {
+            color: var(--primary-color);
+            background-color: #0e0d0d;
+        }
+
+        .subcategories {
+            display: none;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            animation: fadeIn 0.3s ease forwards;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .subcategories.active {
+            display: flex;
+        }
+
+        .subcategory-link {
+            padding: 0.8rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            border-radius: 6px;
+            margin: 0.2rem 0;
+            transition: var(--transition);
+        }
+
+        .subcategory-link:hover,
+        .subcategory-link.active {
+            background: rgba(255, 60, 60, 0.08);
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+            transform: translateX(3px);
+            box-shadow: inset 2px 0 0 var(--primary-color);
+        }
+
+        /* Animation d’apparition douce */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        
+        /* Rules Content */
+        .rules-content {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .rule-category-header h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rule-subcategory h3 {
+            color: var(--primary-dark);
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .rule-item {
+            background-color: #141414;
+            border-left: 3px solid var(--primary-color);
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(255, 60, 60, 0.1);
+        }
+        
+        .rule-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: none;
+            color: var(--text-light);
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        
+        .footer-logo span {
+            color: var(--primary-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .rules-layout {
+                grid-template-columns: 1fr;
+            }
+        
+            .sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+        }
+    </style>        
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    SERVEUR<span>RP</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="reglement.html">Règlement</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://discord.gg/kp9Me4kfne" class="social-btn" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="https://youtube.com/@darkanvg1343" class="social-btn" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@ad.dev7" class="social-btn" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="banner">
+        <div class="container">
+            <h1>Règlement du <span>SERVEUR RP</span></h1>
+            <p>Consultez notre règlement complet pour comprendre le fonctionnement de notre serveur et assurer une expérience RP de qualité pour tous les joueurs.</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Rechercher dans le règlement...">
+            <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+        
+        <div class="rules-layout">
+            <div class="sidebar">
+                <div class="categories-menu">
+                    <div class="category-item">
+                        <div class="category-header active" data-category="general">
+                            <span>Règles Générales</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="subcategories active">
+                            <a href="#general-respect" class="subcategory-link active">Respect</a>
+                            <a href="#general-communication" class="subcategory-link">Communication</a>
+                            <a href="#general-cheats" class="subcategory-link">Anti-triche</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-header" data-category="roleplay">
+                            <span>Règles Roleplay</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="subcategories">
+                            <a href="#rp-bases" class="subcategory-link">Bases du RP</a>
+                            <a href="#rp-personnage" class="subcategory-link">Personnage</a>
+                            <a href="#rp-scenarios" class="subcategory-link">Scénarios</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-header" data-category="jobs">
+                            <span>Règles des Métiers</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="subcategories">
+                            <a href="#jobs-legaux" class="subcategory-link">Métiers légaux</a>
+                            <a href="#jobs-illegaux" class="subcategory-link">Métiers illégaux</a>
+                            <a href="#jobs-gangs" class="subcategory-link">Gangs et organisations</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-header" data-category="sanctions">
+                            <span>Sanctions</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="subcategories">
+                            <a href="#sanctions-types" class="subcategory-link">Types de sanctions</a>
+                            <a href="#sanctions-appel" class="subcategory-link">Procédure d'appel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="rules-content">
+                <!-- Règles Générales -->
+                <div class="rule-category" id="general">
+                    <div class="rule-category-header">
+                        <h2>Règles Générales</h2>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="general-respect">
+                        <h3>Respect</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">1.1 Respect des joueurs</div>
+                            <div class="rule-text">Respectez tous les joueurs et le staff. Aucune forme de discrimination, de harcèlement ou d'insulte ne sera tolérée. Tout comportement toxique entraînera des sanctions immédiates.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">1.2 Comportement général</div>
+                            <div class="rule-text">Adoptez une attitude respectueuse envers tous les membres de la communauté. Évitez les provocations inutiles et privilégiez le dialogue constructif en cas de désaccord.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">1.3 Respect des décisions du staff</div>
+                            <div class="rule-text">Les décisions du staff sont finales. Si vous souhaitez contester une décision, veuillez suivre la procédure d'appel appropriée et ne pas créer de conflit publiquement.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="general-communication">
+                        <h3>Communication</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">2.1 Canaux de communication</div>
+                            <div class="rule-text">Utilisez un langage approprié dans tous les canaux de communication. Les discussions hors RP doivent être limitées aux canaux dédiés. L'utilisation des canaux radio et téléphone doit respecter le réalisme RP.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">2.2 Spam et flood</div>
+                            <div class="rule-text">Évitez le spam et le flood dans les canaux de discussion. Les messages répétitifs ou sans rapport avec le sujet peuvent entraîner un avertissement ou un mute temporaire.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">2.3 Communication hors jeu</div>
+                            <div class="rule-text">La communication hors jeu (HRP) pendant les scènes RP doit être clairement indiquée avec les balises appropriées [HRP] et limitée au strict nécessaire.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="general-cheats">
+                        <h3>Anti-triche</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">3.1 Exploitation</div>
+                            <div class="rule-text">L'exploitation de bugs, l'utilisation de cheats ou de mods non autorisés est strictement interdite et entraînera un bannissement permanent. Signalez immédiatement tout bug découvert au staff.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">3.2 Santé du serveur</div>
+                            <div class="rule-text">Évitez les actions qui pourraient nuire à la stabilité du serveur ou dégrader l'expérience des autres joueurs, comme l'utilisation excessive d'objets, les crashs intentionnels ou la surcharge des systèmes.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">3.3 Comptes multiples</div>
+                            <div class="rule-text">L'utilisation de comptes multiples pour contourner les sanctions ou obtenir des avantages indus est interdite. Un joueur ne doit posséder qu'un seul compte sur le serveur.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Règles Roleplay -->
+                <div class="rule-category" id="roleplay">
+                    <div class="rule-category-header">
+                        <h2>Règles Roleplay</h2>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="rp-bases">
+                        <h3>Bases du RP</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">4.1 Immersion</div>
+                            <div class="rule-text">Maintenez l'immersion RP en tout temps. Évitez les références à la mécanique du jeu, aux mods ou à tout élément qui pourrait briser l'immersion des autres joueurs.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">4.2 FearRP</div>
+                            <div class="rule-text">Le FearRP est obligatoire. Votre personnage doit réagir de manière réaliste face au danger, à la menace ou à la peur de perdre la vie. Ne jouez pas les héros si vous êtes en position de faiblesse.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">4.3 Métagaming</div>
+                            <div class="rule-text">Le métagaming (utilisation d'informations obtenues hors RP pour influencer les actions de votre personnage) est strictement interdit. Votre personnage ne peut agir que sur la base des informations qu'il a obtenues en jeu.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">4.4 PowerGaming</div>
+                            <div class="rule-text">Le PowerGaming (imposer des actions ou des scénarios aux autres joueurs sans leur laisser de choix) est interdit. Chaque joueur doit avoir la possibilité de réagir de manière réaliste aux situations.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="rp-personnage">
+                        <h3>Personnage</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">5.1 Création de personnage</div>
+                            <div class="rule-text">Créez un personnage réaliste avec une histoire cohérente. Évitez les personnages trop fantasques, surpuissants ou avec des histoires invraisemblables. Votre personnage doit s'intégrer dans l'univers du serveur.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">5.2 Mort RP</div>
+                            <div class="rule-text">En cas de mort RP validée par un administrateur, votre personnage doit être considéré comme définitivement mort. Vous devrez créer un nouveau personnage sans aucun lien avec le précédent.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">5.3 Amnésie</div>
+                            <div class="rule-text">Après une blessure grave ou un coma, votre personnage peut souffrir d'amnésie partielle concernant les événements récents. L'amnésie totale n'est autorisée que dans des circonstances exceptionnelles validées par le staff.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="rp-scenarios">
+                        <h3>Scénarios</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">6.1 Continuité</div>
+                            <div class="rule-text">Maintenez la continuité de vos scénarios RP. Les actions et leurs conséquences doivent s'inscrire dans une logique narrative cohérente au fil du temps.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">6.2 Scénarios violents</div>
+                            <div class="rule-text">Les scénarios impliquant de la violence excessive, des contenus sexuels explicites ou des thèmes sensibles doivent être approuvés au préalable par le staff et faire l'objet d'un consentement de tous les participants.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">6.3 NewLife Rule</div>
+                            <div class="rule-text">Après avoir été inconscient ou "respawn", votre personnage ne se souvient pas des circonstances exactes qui ont conduit à sa mort ou son inconscience. Cette règle s'applique pour éviter les vengeances immédiates.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Règles des Métiers -->
+                <div class="rule-category" id="jobs">
+                    <div class="rule-category-header">
+                        <h2>Règles des Métiers</h2>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="jobs-legaux">
+                        <h3>Métiers légaux</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">7.1 Forces de l'ordre</div>
+                            <div class="rule-text">Les membres des forces de l'ordre doivent respecter la procédure et les lois en vigueur. L'abus de pouvoir, la corruption ou les comportements non professionnels feront l'objet de sanctions internes et administratives.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">7.2 Services médicaux</div>
+                            <div class="rule-text">Les médecins et ambulanciers doivent porter assistance à toute personne en danger, quelle que soit son identité ou ses activités. La priorité doit toujours être donnée aux soins et au sauvetage.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">7.3 Avocats et juges</div>
+                            <div class="rule-text">Les professionnels de la justice doivent maintenir une image d'impartialité et de professionnalisme. Les conflits d'intérêt doivent être déclarés et peuvent justifier une récusation.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="jobs-illegaux">
+                        <h3>Métiers illégaux</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">8.1 Activités criminelles</div>
+                            <div class="rule-text">Les activités criminelles doivent être réalisées avec un minimum de préparation RP. Les crimes "gratuits" ou sans motivation RP cohérente sont interdits.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">8.2 Braquages</div>
+                            <div class="rule-text">Les braquages nécessitent un minimum de 3 policiers en service. Un délai de 1 heure doit être respecté entre deux braquages du même type. La prise d'otage est obligatoire pour les braquages de banque.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">8.3 Kidnapping</div>
+                            <div class="rule-text">Le kidnapping doit avoir une motivation RP claire et ne pas durer plus de 30 minutes sans développement de scénario. La victime doit toujours avoir une chance de s'en sortir.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="jobs-gangs">
+                        <h3>Gangs et organisations</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">9.1 Création</div>
+                            <div class="rule-text">La création d'un gang ou d'une organisation doit être validée par le staff. Un document détaillant l'histoire, les objectifs et la structure de l'organisation doit être soumis pour approbation.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">9.2 Territoires</div>
+                            <div class="rule-text">Les guerres de territoire doivent être annoncées au staff et aux gangs concernés. La prise de territoire doit se faire par des scénarios RP élaborés et non par simple élimination des adversaires.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">9.3 Alliances</div>
+                            <div class="rule-text">Les alliances entre organisations doivent être construites progressivement par le biais d'interactions RP significatives. Les alliances instantanées sans développement préalable sont considérées comme du métagaming.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sanctions -->
+                <div class="rule-category" id="sanctions">
+                    <div class="rule-category-header">
+                        <h2>Sanctions</h2>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="sanctions-types">
+                        <h3>Types de sanctions</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">10.1 Avertissement</div>
+                            <div class="rule-text">Premier niveau de sanction pour les infractions mineures. L'accumulation de 3 avertissements dans une période de 30 jours entraîne automatiquement un bannissement temporaire.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">10.2 Bannissement temporaire</div>
+                            <div class="rule-text">Exclusion du serveur pour une durée déterminée, allant de quelques heures à plusieurs semaines selon la gravité et la récurrence des infractions.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">10.3 Bannissement permanent</div>
+                            <div class="rule-text">Exclusion définitive du serveur pour les infractions graves (triche, harcèlement, comportement toxique répété) ou après plusieurs bannissements temporaires.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-subcategory" id="sanctions-appel">
+                        <h3>Procédure d'appel</h3>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">11.1 Appel de sanction</div>   
+                            <div class="rule-text">Un appel de sanction est une demande de sanction par un membre de la communauté. Le staff prendra en charge l'appel et le traiterait selon les sanctions appropriées.</div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-number">11.2 Résolution de sanction</div>
+                            <div class="rule-text">Le staff prendra en charge la résolution de sanction et le traiterait selon les sanctions appropriées.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    SERVEUR<span>RP</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="reglement.html">Règlement</a>
+                    <a href="https://discord.gg/kp9Me4kfne" target="_blank">Discord</a>
+                </div>
+                <p>© 2025 Serveur RP. Tous droits reservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelectorAll('.category-header').forEach(header => {
+        header.addEventListener('click', () => {
+            document.querySelectorAll('.category-header').forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                    h.nextElementSibling.classList.remove('active');
+                }
+            });
+
+            header.classList.toggle('active');
+            const subcategories = header.nextElementSibling;
+            if (subcategories) {
+                subcategories.classList.toggle('active');
+            }
+        });
+    });
+
+    document.querySelectorAll('.subcategory-link').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.subcategory-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            const targetId = link.getAttribute('href');
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                const elementTop = target.getBoundingClientRect().top + window.pageYOffset;
+                const elementHeight = target.offsetHeight;
+                const viewportHeight = window.innerHeight;
+                const scrollTo = elementTop - (viewportHeight / 2) + (elementHeight / 2);
+
+                window.scrollTo({
+                    top: scrollTo,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        function filterRules() {
+            const value = searchInput.value.toLowerCase();
+            const rules = document.querySelectorAll('.rule-item');
+
+            rules.forEach(rule => {
+                const text = rule.innerText.toLowerCase();
+                rule.style.display = text.includes(value) ? 'block' : 'none';
+            });
+        }
+
+        searchBtn.addEventListener('click', filterRules);
+        searchInput.addEventListener('input', filterRules);
+    </script>   
+</body>
