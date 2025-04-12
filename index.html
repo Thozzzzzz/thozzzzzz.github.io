@@ -35,19 +35,20 @@
     }
 
     header {
-        background-color: none;
-        backdrop-filter: blur(10px);
-        padding: 1rem 2rem;
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        box-shadow: var(--box-shadow);
-        width: 90%;
-        max-width: 1100px;
-        border-radius: 10px;
-        transform-style: preserve-3d;
+      background-color: none;
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      position: static;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      z-index: 1;
+      box-shadow: var(--box-shadow);
+      width: 90%;
+      max-width: 1100px;
+      border-radius: 10px;
+      transform-style: preserve-3d;
     }
 
     nav {
@@ -153,7 +154,6 @@
       border-radius: 50px;
       font-weight: bold;
       margin-top: 2rem;
-      margin-left: 5px;
       display: inline-block;
       text-decoration: none;
       box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
@@ -365,6 +365,30 @@
         transform: scale(1.05) rotateX(2deg) rotateY(2deg);
         box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
     }
+
+    .light-mode {
+      --dark-bg: #f5f5f5;
+      --light-bg: #ffffff;
+      --text-light: #000000;
+      --text-dark: #000000;
+      --border-color: #000000;
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1001;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: var(--box-shadow);
+    }
   </style>
 </head>
 <body>
@@ -373,9 +397,9 @@
       <nav>
         <div class="logo">SERVEUR<span>RP</span></div>
         <div class="nav-links">
-          <a href="#accueil">Accueil</a>
-          <a href="reglement.html">Règlement</a>
-          <a href="#contact">Contact</a>
+          <a href="#accueil">🏚️ Accueil</a>
+          <a href="reglement.html">📃 Règlement</a>
+          <a href="#contact">📧 Contact</a>
         </div>
         <div class="social">
           <a href="https://discord.gg/kp9Me4kfne" class="social-btn"><i class="fab fa-discord"></i></a>
@@ -385,13 +409,13 @@
       </nav>
     </div>
   </header>
-
+  <button class="theme-toggle" onclick="toggleTheme()">🌓 Thème</button>
   <section class="hero" id="accueil">
     <div class="container">
       <div class="hero-content">
         <h1>Bienvenue sur <span>SERVEUR RP</span></h1>
         <p>Consultez notre règlement et notre lexique pour vous familiariser avec notre serveur et profiter pleinement de votre expérience RP.</p>
-        <a href="reglement.html" class="discord-btn">Consulter le règlement</a>
+        <a href="reglement.html" class="discord-btn">Consulter le Règlement 📃</a>
       </div>
     </div>
   </section>
@@ -399,10 +423,10 @@
   <section class="gallery-section">
     <h2>Galerie du Serveur</h2>
     <div class="gallery-grid">
-      <img src="1.jpg" alt="Aperçu Serveur RP 1">
-      <img src="2.jpg" alt="Aperçu Serveur RP 2">
-      <img src="3.jpg" alt="Aperçu Serveur RP 3">
-      <img src="4.jpg" alt="Aperçu Serveur RP 4">
+      <img src="img/1.jpg" alt="Aperçu Serveur RP 1">
+      <img src="img/2.jpg" alt="Aperçu Serveur RP 2">
+      <img src="img/3.jpg" alt="Aperçu Serveur RP 3">
+      <img src="img/4.jpg" alt="Aperçu Serveur RP 4">
     </div>
     <div id="imageModal" class="modal">
         <button class="close-btn" id="closeModalBtn">&times;</button>
@@ -410,19 +434,20 @@
     </div>
   </section>
   
-  <section class="rules-teaser" id="contact">
+  <section class="rules-teaser">
     <h3>Consultez notre règlement complet</h3>
     <p>Pour assurer une expérience RP de qualité, nous avons établi un ensemble de règles détaillées. Prenez le temps de les consulter avant de rejoindre notre serveur.</p>
-    <a href="reglement.html" class="discord-btn">Voir le règlement</a>
-    <a href="#" class="discord-btn">Discord</a>
+    <a href="reglement.html" class="discord-btn">📃 Reglement</a>
+    <a href="https://discord.gg/kp9Me4kfne" class="discord-btn"><i class="fab fa-discord"></i></a>
+    <a href="#" class="discord-btn">🎮</a>
   </section>
 
   <footer>
     <div class="container">
       <div class="footer-links">
-        <a href="#accueil">Accueil</a>
-        <a href="reglement.html">Règlement</a>
-        <a href="#contact">Contact</a>
+        <a href="#accueil">🏚️ Accueil</a>
+        <a href="reglement.html">📃 Règlement</a>
+        <a href="#contact">📧 Contact</a>
       </div>
 
       <div class="footer-social">
@@ -437,6 +462,29 @@
     </div>
   </footer>
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") document.body.classList.add("light-mode");
+    
+      document.querySelectorAll('.category-header').forEach(header => {
+        header.addEventListener('click', () => {
+          document.querySelectorAll('.category-header').forEach(h => {
+            if (h !== header) {
+              h.classList.remove('active');
+              h.nextElementSibling?.classList.remove('active');
+            }
+          });
+          header.classList.toggle('active');
+          header.nextElementSibling?.classList.toggle('active');
+        });
+      });
+    });
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    }
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const closeModalBtn = document.getElementById('closeModalBtn');
