@@ -79,18 +79,35 @@
         }
         
         .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 1rem;
+            gap: 1rem;
+        }
+
+        .nav-links.active {
             display: flex;
+        }
+
+        @media (min-width: 768px) {
+        .nav-links {
+            display: flex;
+            flex-direction: row;
+            width: auto;
+            margin-top: 0;
             gap: 2rem;
         }
-        
+        }
+
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
-            position: relative;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            position: relative;
+            padding: 0.5rem;
         }
-        
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -101,19 +118,24 @@
             background: var(--primary-color);
             transition: var(--transition);
         }
-        
+
         .nav-links a:hover::after {
             width: 100%;
         }
-        
-        /* Mobile menu */
-        .mobile-menu-btn {
-            display: none;
+
+        .menu-toggle {
+            display: block;
             background: none;
             border: none;
             color: var(--text-light);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
         }
         
         /* Social icons */
@@ -378,11 +400,7 @@
                 width: 95%;
             }
             
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-links, .social-links {
+            .social-links {
                 display: none;
                 width: 100%;
                 flex-direction: column;
@@ -390,7 +408,7 @@
                 margin-top: 1rem;
             }
             
-            .nav-links.active, .social-links.active {
+            .social-links.active {
                 display: flex;
             }
             
@@ -575,444 +593,307 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    SERVEUR<span>RP</span>
-                </div>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="nav-links" id="navLinks">
-                    <a href="index.html">🏚️ Accueil</a>
-                    <a href="reglement.html">📃 Règlement</a>
-                    <a href="index.html#contact">📧 Contact</a>
-                </div>
-                <div class="social-links" id="socialLinks">
-                    <a href="https://discord.gg/kp9Me4kfne" class="social-btn" target="_blank"><i class="fab fa-discord"></i></a>
-                    <a href="https://youtube.com/@darkanvg1343" class="social-btn" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.tiktok.com/@ad.dev7" class="social-btn" target="_blank"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </nav>
-        </div>
+    <div class=container>
+    <nav>
+    <div class=logo>SERVEUR<span>RP</span></div>
+    <button class=menu-toggle id=menuToggle>
+    <i class="fas fa-bars"></i>
+    </button>
+    <div class=nav-links id=navLinks>
+    <a href=#accueil>🏚️ Accueil</a>
+    <a href=reglement.html>📃 Règlement</a>
+    <a href=#contact>📧 Contact</a>
+    </div>
+    <div class=social>
+    <a href=https://discord.gg/kp9Me4kfne class=social-btn><i class="fab fa-discord"></i></a>
+    <a href=https://youtube.com/@darkanvg1343 class=social-btn><i class="fab fa-youtube"></i></a>
+    <a href=https://www.tiktok.com/@ad.dev7 class=social-btn><i class="fab fa-tiktok"></i></a>
+    </div>
+    </nav>
+    </div>
     </header>
-    <button class="theme-toggle" onclick="toggleTheme()">🌓 Thème</button>
-    <section class="banner">
-        <div class="container">
-            <h1>Règlement du <span>SERVEUR RP</span></h1>
-            <p>Consultez notre règlement complet pour comprendre le fonctionnement de notre serveur et assurer une expérience RP de qualité pour tous les joueurs.</p>
-        </div>
+    <button class=theme-toggle onclick=toggleTheme()>🌓 Thème</button>
+    <section class=banner>
+    <div class=container>
+    <h1>Règlement du <span>SERVEUR RP</span></h1>
+    <p>Consultez notre règlement complet pour comprendre le fonctionnement de notre serveur et assurer une expérience RP de qualité pour tous les joueurs.</p>
+    </div>
     </section>
-
     <section class="faq container">
-        <h2>❓ Questions Fréquentes</h2>
-        <details>
-          <summary>Que signifie "FearRP" ?</summary>
-          <p>Le FearRP signifie que votre personnage doit avoir peur pour sa vie et agir de manière réaliste face au danger.</p>
-        </details>
-        <details>
-          <summary>Est-ce que je peux utiliser plusieurs comptes ?</summary>
-          <p>Non. Les comptes multiples sont interdits. Vous devez jouer avec un seul compte.</p>
-        </details>
-        <details>
-          <summary>Puis-je ignorer une décision du staff ?</summary>
-          <p>Les décisions du staff doivent être respectées. Utilisez la procédure d’appel si nécessaire.</p>
-        </details>
+    <h2>❓ Questions Fréquentes</h2>
+    <details>
+    <summary>Que signifie "FearRP" ?</summary>
+    <p>Le FearRP signifie que votre personnage doit avoir peur pour sa vie et agir de manière réaliste face au danger.</p>
+    </details>
+    <details>
+    <summary>Est-ce que je peux utiliser plusieurs comptes ?</summary>
+    <p>Non. Les comptes multiples sont interdits. Vous devez jouer avec un seul compte.</p>
+    </details>
+    <details>
+    <summary>Puis-je ignorer une décision du staff ?</summary>
+    <p>Les décisions du staff doivent être respectées. Utilisez la procédure d’appel si nécessaire.</p>
+    </details>
     </section>
-    
-    <div class="container">
-        <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="Rechercher dans le règlement...">
-            <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
-        </div>
-        
-        <div class="rules-layout">
-            <div class="sidebar">
-                <div class="categories-menu">
-                    <div class="category-item">
-                        <div class="category-header active" data-category="general">
-                            <span>🤷‍♂️ Règles Générales</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="subcategories active">
-                            <a href="#general-respect" class="subcategory-link active">Respect</a>
-                            <a href="#general-communication" class="subcategory-link">Communication</a>
-                            <a href="#general-cheats" class="subcategory-link">Anti-triche</a>
-                        </div>
-                    </div>
-                    
-                    <div class="category-item">
-                        <div class="category-header" data-category="roleplay">
-                            <span>🖱️ Règles Roleplay</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="subcategories">
-                            <a href="#rp-bases" class="subcategory-link">Bases du RP</a>
-                            <a href="#rp-personnage" class="subcategory-link">Personnage</a>
-                            <a href="#rp-scenarios" class="subcategory-link">Scénarios</a>
-                        </div>
-                    </div>
-                    
-                    <div class="category-item">
-                        <div class="category-header" data-category="jobs">
-                            <span>💼 Règles des Métiers</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="subcategories">
-                            <a href="#jobs-legaux" class="subcategory-link">Métiers légaux</a>
-                            <a href="#jobs-illegaux" class="subcategory-link">Métiers illégaux</a>
-                            <a href="#jobs-gangs" class="subcategory-link">Gangs et organisations</a>
-                        </div>
-                    </div>
-                    
-                    <div class="category-item">
-                        <div class="category-header" data-category="sanctions">
-                            <span>🚨 Sanctions</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="subcategories">
-                            <a href="#sanctions-types" class="subcategory-link">Types de sanctions</a>
-                            <a href="#sanctions-appel" class="subcategory-link">Procédure d'appel</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="rules-content">
-                <!-- Règles Générales -->
-                <div class="rule-category" id="general">
-                    <div class="rule-category-header">
-                        <h2>🤷‍♂️ Règles Générales</h2>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="general-respect">
-                        <h3>Respect</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">1.1 Respect des joueurs</div>
-                            <div class="rule-text">Respectez tous les joueurs et le staff. Aucune forme de discrimination, de harcèlement ou d'insulte ne sera tolérée. Tout comportement toxique entraînera des sanctions immédiates.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">1.2 Comportement général</div>
-                            <div class="rule-text">Adoptez une attitude respectueuse envers tous les membres de la communauté. Évitez les provocations inutiles et privilégiez le dialogue constructif en cas de désaccord.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">1.3 Respect des décisions du staff</div>
-                            <div class="rule-text">Les décisions du staff sont finales. Si vous souhaitez contester une décision, veuillez suivre la procédure d'appel appropriée et ne pas créer de conflit publiquement.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="general-communication">
-                        <h3>Communication</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">2.1 Canaux de communication</div>
-                            <div class="rule-text">Utilisez un langage approprié dans tous les canaux de communication. Les discussions hors RP doivent être limitées aux canaux dédiés. L'utilisation des canaux radio et téléphone doit respecter le réalisme RP.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">2.2 Spam et flood</div>
-                            <div class="rule-text">Évitez le spam et le flood dans les canaux de discussion. Les messages répétitifs ou sans rapport avec le sujet peuvent entraîner un avertissement ou un mute temporaire.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">2.3 Communication hors jeu</div>
-                            <div class="rule-text">La communication hors jeu (HRP) pendant les scènes RP doit être clairement indiquée avec les balises appropriées [HRP] et limitée au strict nécessaire.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="general-cheats">
-                        <h3>Anti-triche</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">3.1 Exploitation</div>
-                            <div class="rule-text">L'exploitation de bugs, l'utilisation de cheats ou de mods non autorisés est strictement interdite et entraînera un bannissement permanent. Signalez immédiatement tout bug découvert au staff.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">3.2 Santé du serveur</div>
-                            <div class="rule-text">Évitez les actions qui pourraient nuire à la stabilité du serveur ou dégrader l'expérience des autres joueurs, comme l'utilisation excessive d'objets, les crashs intentionnels ou la surcharge des systèmes.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">3.3 Comptes multiples</div>
-                            <div class="rule-text">L'utilisation de comptes multiples pour contourner les sanctions ou obtenir des avantages indus est interdite. Un joueur ne doit posséder qu'un seul compte sur le serveur.</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Règles Roleplay -->
-                <div class="rule-category" id="roleplay">
-                    <div class="rule-category-header">
-                        <h2>🖱️ Règles Roleplay</h2>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="rp-bases">
-                        <h3>Bases du RP</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">4.1 Immersion</div>
-                            <div class="rule-text">Maintenez l'immersion RP en tout temps. Évitez les références à la mécanique du jeu, aux mods ou à tout élément qui pourrait briser l'immersion des autres joueurs.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">4.2 FearRP</div>
-                            <div class="rule-text">Le FearRP est obligatoire. Votre personnage doit réagir de manière réaliste face au danger, à la menace ou à la peur de perdre la vie. Ne jouez pas les héros si vous êtes en position de faiblesse.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">4.3 Métagaming</div>
-                            <div class="rule-text">Le métagaming (utilisation d'informations obtenues hors RP pour influencer les actions de votre personnage) est strictement interdit. Votre personnage ne peut agir que sur la base des informations qu'il a obtenues en jeu.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">4.4 PowerGaming</div>
-                            <div class="rule-text">Le PowerGaming (imposer des actions ou des scénarios aux autres joueurs sans leur laisser de choix) est interdit. Chaque joueur doit avoir la possibilité de réagir de manière réaliste aux situations.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="rp-personnage">
-                        <h3>Personnage</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">5.1 Création de personnage</div>
-                            <div class="rule-text">Créez un personnage réaliste avec une histoire cohérente. Évitez les personnages trop fantasques, surpuissants ou avec des histoires invraisemblables. Votre personnage doit s'intégrer dans l'univers du serveur.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">5.2 Mort RP</div>
-                            <div class="rule-text">En cas de mort RP validée par un administrateur, votre personnage doit être considéré comme définitivement mort. Vous devrez créer un nouveau personnage sans aucun lien avec le précédent.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">5.3 Amnésie</div>
-                            <div class="rule-text">Après une blessure grave ou un coma, votre personnage peut souffrir d'amnésie partielle concernant les événements récents. L'amnésie totale n'est autorisée que dans des circonstances exceptionnelles validées par le staff.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="rp-scenarios">
-                        <h3>Scénarios</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">6.1 Continuité</div>
-                            <div class="rule-text">Maintenez la continuité de vos scénarios RP. Les actions et leurs conséquences doivent s'inscrire dans une logique narrative cohérente au fil du temps.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">6.2 Scénarios violents</div>
-                            <div class="rule-text">Les scénarios impliquant de la violence excessive, des contenus sexuels explicites ou des thèmes sensibles doivent être approuvés au préalable par le staff et faire l'objet d'un consentement de tous les participants.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">6.3 NewLife Rule</div>
-                            <div class="rule-text">Après avoir été inconscient ou "respawn", votre personnage ne se souvient pas des circonstances exactes qui ont conduit à sa mort ou son inconscience. Cette règle s'applique pour éviter les vengeances immédiates.</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Règles des Métiers -->
-                <div class="rule-category" id="jobs">
-                    <div class="rule-category-header">
-                        <h2>💼 Règles des Métiers</h2>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="jobs-legaux">
-                        <h3>Métiers légaux</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">7.1 Forces de l'ordre</div>
-                            <div class="rule-text">Les membres des forces de l'ordre doivent respecter la procédure et les lois en vigueur. L'abus de pouvoir, la corruption ou les comportements non professionnels feront l'objet de sanctions internes et administratives.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">7.2 Services médicaux</div>
-                            <div class="rule-text">Les médecins et ambulanciers doivent porter assistance à toute personne en danger, quelle que soit son identité ou ses activités. La priorité doit toujours être donnée aux soins et au sauvetage.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">7.3 Avocats et juges</div>
-                            <div class="rule-text">Les professionnels de la justice doivent maintenir une image d'impartialité et de professionnalisme. Les conflits d'intérêt doivent être déclarés et peuvent justifier une récusation.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="jobs-illegaux">
-                        <h3>Métiers illégaux</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">8.1 Activités criminelles</div>
-                            <div class="rule-text">Les activités criminelles doivent être réalisées avec un minimum de préparation RP. Les crimes "gratuits" ou sans motivation RP cohérente sont interdits.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">8.2 Braquages</div>
-                            <div class="rule-text">Les braquages nécessitent un minimum de 3 policiers en service. Un délai de 1 heure doit être respecté entre deux braquages du même type. La prise d'otage est obligatoire pour les braquages de banque.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">8.3 Kidnapping</div>
-                            <div class="rule-text">Le kidnapping doit avoir une motivation RP claire et ne pas durer plus de 30 minutes sans développement de scénario. La victime doit toujours avoir une chance de s'en sortir.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="jobs-gangs">
-                        <h3>Gangs et organisations</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">9.1 Création</div>
-                            <div class="rule-text">La création d'un gang ou d'une organisation doit être validée par le staff. Un document détaillant l'histoire, les objectifs et la structure de l'organisation doit être soumis pour approbation.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">9.2 Territoires</div>
-                            <div class="rule-text">Les guerres de territoire doivent être annoncées au staff et aux gangs concernés. La prise de territoire doit se faire par des scénarios RP élaborés et non par simple élimination des adversaires.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">9.3 Alliances</div>
-                            <div class="rule-text">Les alliances entre organisations doivent être construites progressivement par le biais d'interactions RP significatives. Les alliances instantanées sans développement préalable sont considérées comme du métagaming.</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Sanctions -->
-                <div class="rule-category" id="sanctions">
-                    <div class="rule-category-header">
-                        <h2>🚨 Sanctions</h2>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="sanctions-types">
-                        <h3>Types de sanctions</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">10.1 Avertissement</div>
-                            <div class="rule-text">Premier niveau de sanction pour les infractions mineures. L'accumulation de 3 avertissements dans une période de 30 jours entraîne automatiquement un bannissement temporaire.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">10.2 Bannissement temporaire</div>
-                            <div class="rule-text">Exclusion du serveur pour une durée déterminée, allant de quelques heures à plusieurs semaines selon la gravité et la récurrence des infractions.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">10.3 Bannissement permanent</div>
-                            <div class="rule-text">Exclusion définitive du serveur pour les infractions graves (triche, harcèlement, comportement toxique répété) ou après plusieurs bannissements temporaires.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rule-subcategory" id="sanctions-appel">
-                        <h3>Procédure d'appel</h3>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">11.1 Appel de sanction</div>   
-                            <div class="rule-text">Un appel de sanction est une demande de sanction par un membre de la communauté. Le staff prendra en charge l'appel et le traiterait selon les sanctions appropriées.</div>
-                        </div>
-                        
-                        <div class="rule-item">
-                            <div class="rule-number">11.2 Résolution de sanction</div>
-                            <div class="rule-text">Le staff prendra en charge la résolution de sanction et le traiterait selon les sanctions appropriées.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> 
+    <div class=container>
+    <div class=search-container>
+    <input class=search-input id=searchInput placeholder="Rechercher dans le règlement...">
+    <button class=search-btn id=searchBtn><i class="fas fa-search"></i></button>
+    </div>
+    <div class=rules-layout>
+    <div class=sidebar>
+    <div class=categories-menu>
+    <div class=category-item>
+    <div class="category-header active" data-category=general>
+    <span>🤷‍♂️ Règles Générales</span>
+    <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="subcategories active">
+    <a href=#general-respect class="subcategory-link active">Respect</a>
+    <a href=#general-communication class=subcategory-link>Communication</a>
+    <a href=#general-cheats class=subcategory-link>Anti-triche</a>
+    </div>
+    </div>
+    <div class=category-item>
+    <div class=category-header data-category=roleplay>
+    <span>🖱️ Règles Roleplay</span>
+    <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class=subcategories>
+    <a href=#rp-bases class=subcategory-link>Bases du RP</a>
+    <a href=#rp-personnage class=subcategory-link>Personnage</a>
+    <a href=#rp-scenarios class=subcategory-link>Scénarios</a>
+    </div>
+    </div>
+    <div class=category-item>
+    <div class=category-header data-category=jobs>
+    <span>💼 Règles des Métiers</span>
+    <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class=subcategories>
+    <a href=#jobs-legaux class=subcategory-link>Métiers légaux</a>
+    <a href=#jobs-illegaux class=subcategory-link>Métiers illégaux</a>
+    <a href=#jobs-gangs class=subcategory-link>Gangs et organisations</a>
+    </div>
+    </div>
+    <div class=category-item>
+    <div class=category-header data-category=sanctions>
+    <span>🚨 Sanctions</span>
+    <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class=subcategories>
+    <a href=#sanctions-types class=subcategory-link>Types de sanctions</a>
+    <a href=#sanctions-appel class=subcategory-link>Procédure d'appel</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class=rules-content>
+    <div class=rule-category id=general>
+    <div class=rule-category-header>
+    <h2>🤷‍♂️ Règles Générales</h2>
+    </div>
+    <div class=rule-subcategory id=general-respect>
+    <h3>Respect</h3>
+    <div class=rule-item>
+    <div class=rule-number>1.1 Respect des joueurs</div>
+    <div class=rule-text>Respectez tous les joueurs et le staff. Aucune forme de discrimination, de harcèlement ou d'insulte ne sera tolérée. Tout comportement toxique entraînera des sanctions immédiates.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>1.2 Comportement général</div>
+    <div class=rule-text>Adoptez une attitude respectueuse envers tous les membres de la communauté. Évitez les provocations inutiles et privilégiez le dialogue constructif en cas de désaccord.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>1.3 Respect des décisions du staff</div>
+    <div class=rule-text>Les décisions du staff sont finales. Si vous souhaitez contester une décision, veuillez suivre la procédure d'appel appropriée et ne pas créer de conflit publiquement.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=general-communication>
+    <h3>Communication</h3>
+    <div class=rule-item>
+    <div class=rule-number>2.1 Canaux de communication</div>
+    <div class=rule-text>Utilisez un langage approprié dans tous les canaux de communication. Les discussions hors RP doivent être limitées aux canaux dédiés. L'utilisation des canaux radio et téléphone doit respecter le réalisme RP.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>2.2 Spam et flood</div>
+    <div class=rule-text>Évitez le spam et le flood dans les canaux de discussion. Les messages répétitifs ou sans rapport avec le sujet peuvent entraîner un avertissement ou un mute temporaire.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>2.3 Communication hors jeu</div>
+    <div class=rule-text>La communication hors jeu (HRP) pendant les scènes RP doit être clairement indiquée avec les balises appropriées [HRP] et limitée au strict nécessaire.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=general-cheats>
+    <h3>Anti-triche</h3>
+    <div class=rule-item>
+    <div class=rule-number>3.1 Exploitation</div>
+    <div class=rule-text>L'exploitation de bugs, l'utilisation de cheats ou de mods non autorisés est strictement interdite et entraînera un bannissement permanent. Signalez immédiatement tout bug découvert au staff.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>3.2 Santé du serveur</div>
+    <div class=rule-text>Évitez les actions qui pourraient nuire à la stabilité du serveur ou dégrader l'expérience des autres joueurs, comme l'utilisation excessive d'objets, les crashs intentionnels ou la surcharge des systèmes.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>3.3 Comptes multiples</div>
+    <div class=rule-text>L'utilisation de comptes multiples pour contourner les sanctions ou obtenir des avantages indus est interdite. Un joueur ne doit posséder qu'un seul compte sur le serveur.</div>
+    </div>
+    </div>
+    </div>
+    <div class=rule-category id=roleplay>
+    <div class=rule-category-header>
+    <h2>🖱️ Règles Roleplay</h2>
+    </div>
+    <div class=rule-subcategory id=rp-bases>
+    <h3>Bases du RP</h3>
+    <div class=rule-item>
+    <div class=rule-number>4.1 Immersion</div>
+    <div class=rule-text>Maintenez l'immersion RP en tout temps. Évitez les références à la mécanique du jeu, aux mods ou à tout élément qui pourrait briser l'immersion des autres joueurs.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>4.2 FearRP</div>
+    <div class=rule-text>Le FearRP est obligatoire. Votre personnage doit réagir de manière réaliste face au danger, à la menace ou à la peur de perdre la vie. Ne jouez pas les héros si vous êtes en position de faiblesse.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>4.3 Métagaming</div>
+    <div class=rule-text>Le métagaming (utilisation d'informations obtenues hors RP pour influencer les actions de votre personnage) est strictement interdit. Votre personnage ne peut agir que sur la base des informations qu'il a obtenues en jeu.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>4.4 PowerGaming</div>
+    <div class=rule-text>Le PowerGaming (imposer des actions ou des scénarios aux autres joueurs sans leur laisser de choix) est interdit. Chaque joueur doit avoir la possibilité de réagir de manière réaliste aux situations.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=rp-personnage>
+    <h3>Personnage</h3>
+    <div class=rule-item>
+    <div class=rule-number>5.1 Création de personnage</div>
+    <div class=rule-text>Créez un personnage réaliste avec une histoire cohérente. Évitez les personnages trop fantasques, surpuissants ou avec des histoires invraisemblables. Votre personnage doit s'intégrer dans l'univers du serveur.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>5.2 Mort RP</div>
+    <div class=rule-text>En cas de mort RP validée par un administrateur, votre personnage doit être considéré comme définitivement mort. Vous devrez créer un nouveau personnage sans aucun lien avec le précédent.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>5.3 Amnésie</div>
+    <div class=rule-text>Après une blessure grave ou un coma, votre personnage peut souffrir d'amnésie partielle concernant les événements récents. L'amnésie totale n'est autorisée que dans des circonstances exceptionnelles validées par le staff.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=rp-scenarios>
+    <h3>Scénarios</h3>
+    <div class=rule-item>
+    <div class=rule-number>6.1 Continuité</div>
+    <div class=rule-text>Maintenez la continuité de vos scénarios RP. Les actions et leurs conséquences doivent s'inscrire dans une logique narrative cohérente au fil du temps.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>6.2 Scénarios violents</div>
+    <div class=rule-text>Les scénarios impliquant de la violence excessive, des contenus sexuels explicites ou des thèmes sensibles doivent être approuvés au préalable par le staff et faire l'objet d'un consentement de tous les participants.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>6.3 NewLife Rule</div>
+    <div class=rule-text>Après avoir été inconscient ou "respawn", votre personnage ne se souvient pas des circonstances exactes qui ont conduit à sa mort ou son inconscience. Cette règle s'applique pour éviter les vengeances immédiates.</div>
+    </div>
+    </div>
+    </div>
+    <div class=rule-category id=jobs>
+    <div class=rule-category-header>
+    <h2>💼 Règles des Métiers</h2>
+    </div>
+    <div class=rule-subcategory id=jobs-legaux>
+    <h3>Métiers légaux</h3>
+    <div class=rule-item>
+    <div class=rule-number>7.1 Forces de l'ordre</div>
+    <div class=rule-text>Les membres des forces de l'ordre doivent respecter la procédure et les lois en vigueur. L'abus de pouvoir, la corruption ou les comportements non professionnels feront l'objet de sanctions internes et administratives.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>7.2 Services médicaux</div>
+    <div class=rule-text>Les médecins et ambulanciers doivent porter assistance à toute personne en danger, quelle que soit son identité ou ses activités. La priorité doit toujours être donnée aux soins et au sauvetage.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>7.3 Avocats et juges</div>
+    <div class=rule-text>Les professionnels de la justice doivent maintenir une image d'impartialité et de professionnalisme. Les conflits d'intérêt doivent être déclarés et peuvent justifier une récusation.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=jobs-illegaux>
+    <h3>Métiers illégaux</h3>
+    <div class=rule-item>
+    <div class=rule-number>8.1 Activités criminelles</div>
+    <div class=rule-text>Les activités criminelles doivent être réalisées avec un minimum de préparation RP. Les crimes "gratuits" ou sans motivation RP cohérente sont interdits.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>8.2 Braquages</div>
+    <div class=rule-text>Les braquages nécessitent un minimum de 3 policiers en service. Un délai de 1 heure doit être respecté entre deux braquages du même type. La prise d'otage est obligatoire pour les braquages de banque.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>8.3 Kidnapping</div>
+    <div class=rule-text>Le kidnapping doit avoir une motivation RP claire et ne pas durer plus de 30 minutes sans développement de scénario. La victime doit toujours avoir une chance de s'en sortir.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=jobs-gangs>
+    <h3>Gangs et organisations</h3>
+    <div class=rule-item>
+    <div class=rule-number>9.1 Création</div>
+    <div class=rule-text>La création d'un gang ou d'une organisation doit être validée par le staff. Un document détaillant l'histoire, les objectifs et la structure de l'organisation doit être soumis pour approbation.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>9.2 Territoires</div>
+    <div class=rule-text>Les guerres de territoire doivent être annoncées au staff et aux gangs concernés. La prise de territoire doit se faire par des scénarios RP élaborés et non par simple élimination des adversaires.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>9.3 Alliances</div>
+    <div class=rule-text>Les alliances entre organisations doivent être construites progressivement par le biais d'interactions RP significatives. Les alliances instantanées sans développement préalable sont considérées comme du métagaming.</div>
+    </div>
+    </div>
+    </div>
+    <div class=rule-category id=sanctions>
+    <div class=rule-category-header>
+    <h2>🚨 Sanctions</h2>
+    </div>
+    <div class=rule-subcategory id=sanctions-types>
+    <h3>Types de sanctions</h3>
+    <div class=rule-item>
+    <div class=rule-number>10.1 Avertissement</div>
+    <div class=rule-text>Premier niveau de sanction pour les infractions mineures. L'accumulation de 3 avertissements dans une période de 30 jours entraîne automatiquement un bannissement temporaire.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>10.2 Bannissement temporaire</div>
+    <div class=rule-text>Exclusion du serveur pour une durée déterminée, allant de quelques heures à plusieurs semaines selon la gravité et la récurrence des infractions.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>10.3 Bannissement permanent</div>
+    <div class=rule-text>Exclusion définitive du serveur pour les infractions graves (triche, harcèlement, comportement toxique répété) ou après plusieurs bannissements temporaires.</div>
+    </div>
+    </div>
+    <div class=rule-subcategory id=sanctions-appel>
+    <h3>Procédure d'appel</h3>
+    <div class=rule-item>
+    <div class=rule-number>11.1 Appel de sanction</div>
+    <div class=rule-text>Un appel de sanction est une demande de sanction par un membre de la communauté. Le staff prendra en charge l'appel et le traiterait selon les sanctions appropriées.</div>
+    </div>
+    <div class=rule-item>
+    <div class=rule-number>11.2 Résolution de sanction</div>
+    <div class=rule-text>Le staff prendra en charge la résolution de sanction et le traiterait selon les sanctions appropriées.</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">
-                    SERVEUR<span>RP</span>
-                </div>
-                <div class="footer-links">
-                    <a href="index.html">🏚️ Accueil</a>
-                    <a href="reglement.html">📃 Règlement</a>
-                    <a href="index.html#contact" target="_blank">📧 Contact</a>
-                    <a href="https://discord.gg/kp9Me4kfne" target="_blank"><i class="fab fa-discord"></i></a>
-                </div>
-                <p>© 2025 Serveur RP. Tous droits reservés.</p>
-            </div>
-        </div>
-    </footer>
+    <div class=container>
+    <div class=footer-content>
+    <div class=logo>
+    SERVEUR<span>RP</span>
+    </div>
+    <div class=footer-links>
+    <a href=index.html>🏚️ Accueil</a>
+    <a href=reglement.html>📃 Règlement</a>
+    <a href=index.html#contact target=_blank>📧 Contact</a>
+    <a href=https://discord.gg/kp9Me4kfne target=_blank><i class="fab fa-discord"></i></a>
+    </div>
+    <p>© 2025 Serveur RP. Tous droits reservés.</p>
+    </div>
+    </div>
+    </footer></div></body>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const savedTheme = localStorage.getItem("theme");
-          if (savedTheme === "light") document.body.classList.add("light-mode");
-    
-            document.querySelectorAll('.category-header').forEach(header => {
-                header.addEventListener('click', () => {
-                    document.querySelectorAll('.category-header').forEach(h => {
-                    if (h !== header) {
-                        h.classList.remove('active');
-                        h.nextElementSibling?.classList.remove('active');
-                        h.querySelector('i').classList.remove('fa-chevron-up');
-                        h.querySelector('i').classList.add('fa-chevron-down');
-                    }
-                    });
-                    header.classList.toggle('active');
-                    const subcategory = header.nextElementSibling;
-                    subcategory?.classList.toggle('active');
-                    const icon = header.querySelector('i');
-                    icon.classList.toggle('fa-chevron-down');
-                    icon.classList.toggle('fa-chevron-up');
-                    if (subcategory?.classList.contains('active')) {
-                    subcategory.style.maxHeight = subcategory.scrollHeight + 'px';
-                    } else {
-                    subcategory.style.maxHeight = '0';
-                    }
-                });
-            });
-
-
-            document.querySelectorAll('.subcategory-link').forEach(link => {
-                link.addEventListener('click', e => {
-                    e.preventDefault();
-                    document.querySelectorAll('.subcategory-link').forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                    const targetId = link.getAttribute('href');
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                    const offset = target.getBoundingClientRect().top + window.pageYOffset;
-                    const scroll = offset - (window.innerHeight / 2) + (target.offsetHeight / 2);
-                    window.scrollTo({ top: scroll, behavior: 'smooth' });
-                    }
-                });
-            });
-
-    
-          const searchInput = document.getElementById('searchInput');
-          const searchBtn = document.getElementById('searchBtn');
-    
-          function highlightSearch(term) {
-            document.querySelectorAll('.rule-item').forEach(rule => {
-              rule.innerHTML = rule.innerHTML.replace(/<mark>|<\/mark>/g, '');
-              if (term.length > 1) {
-                const regex = new RegExp(`(${term})`, 'gi');
-                rule.innerHTML = rule.innerHTML.replace(regex, '<mark>$1</mark>');
-              }
-            });
-          }
-    
-          function filterRules() {
-            const value = searchInput.value.toLowerCase();
-            const rules = document.querySelectorAll('.rule-item');
-            rules.forEach(rule => {
-              const text = rule.textContent.toLowerCase();
-              rule.style.display = text.includes(value) ? 'block' : 'none';
-            });
-            highlightSearch(value);
-          }
-    
-          searchBtn?.addEventListener('click', filterRules);
-          searchInput?.addEventListener('input', filterRules);
-        });
-    
-        function toggleTheme() {
-          document.body.classList.toggle("light-mode");
-          const isLight = document.body.classList.contains("light-mode");
-          localStorage.setItem("theme", isLight ? "light" : "dark");
-        }
+        function _0xce6a(){const _0x295589=['.category-header','light-mode','scrollTo','innerHTML','remove','input','length','.rule-item','maxHeight','toLowerCase','preventDefault','querySelectorAll','replace','getItem','<i\x20class=\x22fas\x20fa-bars\x22></i>','dark','getAttribute','click','setItem','2252FbevZr','forEach','theme','contains','829yIAQtP','<mark>$1</mark>','2133640zCIYoP','smooth','pageYOffset','addEventListener','toggle','style','fa-chevron-up','441198Gxbvwi','offsetHeight','searchBtn','textContent','nextElementSibling','active','7RzoeOW','block','body','3485576ALALQD','266103TYlrKE','1555emHpGt','<i\x20class=\x22fas\x20fa-times\x22></i>','light','getBoundingClientRect','add','2177814rrrwxp','value','766UlHIjy','includes','.subcategory-link','getElementById','top','fa-chevron-down','querySelector','classList'];_0xce6a=function(){return _0x295589;};return _0xce6a();}function _0x1d8f(_0x1ec46f,_0xa9403b){const _0xce6a00=_0xce6a();return _0x1d8f=function(_0x1d8fb7,_0x39d0ba){_0x1d8fb7=_0x1d8fb7-0x1c1;let _0x4e7722=_0xce6a00[_0x1d8fb7];return _0x4e7722;},_0x1d8f(_0x1ec46f,_0xa9403b);}(function(_0x57154d,_0x2f9193){const _0x413a1a=_0x1d8f,_0x46b1a7=_0x57154d();while(!![]){try{const _0x531508=parseInt(_0x413a1a(0x1d0))/0x1*(parseInt(_0x413a1a(0x1eb))/0x2)+parseInt(_0x413a1a(0x1e3))/0x3+parseInt(_0x413a1a(0x1cc))/0x4*(parseInt(_0x413a1a(0x1e4))/0x5)+parseInt(_0x413a1a(0x1e9))/0x6*(parseInt(_0x413a1a(0x1df))/0x7)+-parseInt(_0x413a1a(0x1e2))/0x8+-parseInt(_0x413a1a(0x1d9))/0x9+-parseInt(_0x413a1a(0x1d2))/0xa;if(_0x531508===_0x2f9193)break;else _0x46b1a7['push'](_0x46b1a7['shift']());}catch(_0x4fce4a){_0x46b1a7['push'](_0x46b1a7['shift']());}}}(_0xce6a,0x3c1ab),document['addEventListener']('DOMContentLoaded',()=>{const _0x38abda=_0x1d8f,_0xdf1f8a=localStorage[_0x38abda(0x1c6)](_0x38abda(0x1ce));if(_0xdf1f8a===_0x38abda(0x1e6))document['body']['classList'][_0x38abda(0x1e8)](_0x38abda(0x1f4));document['querySelectorAll'](_0x38abda(0x1f3))['forEach'](_0x2bb4fa=>{const _0x1287bc=_0x38abda;_0x2bb4fa[_0x1287bc(0x1d5)]('click',()=>{const _0x1d4f41=_0x1287bc;document[_0x1d4f41(0x1c4)](_0x1d4f41(0x1f3))[_0x1d4f41(0x1cd)](_0x4219c4=>{const _0x431135=_0x1d4f41;_0x4219c4!==_0x2bb4fa&&(_0x4219c4['classList'][_0x431135(0x1f7)](_0x431135(0x1de)),_0x4219c4[_0x431135(0x1dd)]?.[_0x431135(0x1f2)][_0x431135(0x1f7)](_0x431135(0x1de)),_0x4219c4[_0x431135(0x1f1)]('i')[_0x431135(0x1f2)]['remove'](_0x431135(0x1d8)),_0x4219c4[_0x431135(0x1f1)]('i')['classList'][_0x431135(0x1e8)]('fa-chevron-down'));}),_0x2bb4fa[_0x1d4f41(0x1f2)][_0x1d4f41(0x1d6)](_0x1d4f41(0x1de));const _0x29f8d9=_0x2bb4fa[_0x1d4f41(0x1dd)];_0x29f8d9?.['classList']['toggle'](_0x1d4f41(0x1de));const _0x5e41fe=_0x2bb4fa['querySelector']('i');_0x5e41fe['classList'][_0x1d4f41(0x1d6)](_0x1d4f41(0x1f0)),_0x5e41fe[_0x1d4f41(0x1f2)]['toggle'](_0x1d4f41(0x1d8)),_0x29f8d9?.['classList'][_0x1d4f41(0x1cf)](_0x1d4f41(0x1de))?_0x29f8d9[_0x1d4f41(0x1d7)][_0x1d4f41(0x1c1)]=_0x29f8d9['scrollHeight']+'px':_0x29f8d9[_0x1d4f41(0x1d7)][_0x1d4f41(0x1c1)]='0';});});const _0x340da6=document['getElementById']('menuToggle'),_0x297628=document[_0x38abda(0x1ee)]('navLinks');_0x340da6&&_0x297628&&_0x340da6[_0x38abda(0x1d5)](_0x38abda(0x1ca),()=>{const _0x462bc7=_0x38abda;_0x297628[_0x462bc7(0x1f2)][_0x462bc7(0x1d6)](_0x462bc7(0x1de)),_0x340da6[_0x462bc7(0x1f6)]=_0x297628['classList']['contains'](_0x462bc7(0x1de))?_0x462bc7(0x1e5):_0x462bc7(0x1c7);});document['querySelectorAll'](_0x38abda(0x1ed))['forEach'](_0x13973c=>{const _0x717e38=_0x38abda;_0x13973c[_0x717e38(0x1d5)](_0x717e38(0x1ca),_0x2230bf=>{const _0x2a3684=_0x717e38;_0x2230bf[_0x2a3684(0x1c3)](),document[_0x2a3684(0x1c4)](_0x2a3684(0x1ed))['forEach'](_0x399b6a=>_0x399b6a[_0x2a3684(0x1f2)][_0x2a3684(0x1f7)]('active')),_0x13973c[_0x2a3684(0x1f2)][_0x2a3684(0x1e8)]('active');const _0x5206fc=_0x13973c[_0x2a3684(0x1c9)]('href'),_0x470691=document[_0x2a3684(0x1f1)](_0x5206fc);if(_0x470691){const _0x512dd7=_0x470691[_0x2a3684(0x1e7)]()[_0x2a3684(0x1ef)]+window[_0x2a3684(0x1d4)],_0x4307db=_0x512dd7-window['innerHeight']/0x2+_0x470691[_0x2a3684(0x1da)]/0x2;window[_0x2a3684(0x1f5)]({'top':_0x4307db,'behavior':_0x2a3684(0x1d3)});}});});const _0x5dd82b=document[_0x38abda(0x1ee)]('searchInput'),_0x4f7be5=document[_0x38abda(0x1ee)](_0x38abda(0x1db));function _0x59561f(_0x59921a){const _0x232b4e=_0x38abda;document[_0x232b4e(0x1c4)](_0x232b4e(0x1fa))[_0x232b4e(0x1cd)](_0x21f7c0=>{const _0x3582b6=_0x232b4e;_0x21f7c0[_0x3582b6(0x1f6)]=_0x21f7c0[_0x3582b6(0x1f6)][_0x3582b6(0x1c5)](/<mark>|<\/mark>/g,'');if(_0x59921a[_0x3582b6(0x1f9)]>0x1){const _0x4a852c=new RegExp('('+_0x59921a+')','gi');_0x21f7c0[_0x3582b6(0x1f6)]=_0x21f7c0[_0x3582b6(0x1f6)][_0x3582b6(0x1c5)](_0x4a852c,_0x3582b6(0x1d1));}});}function _0x1b9af4(){const _0x4013c8=_0x38abda,_0x494983=_0x5dd82b[_0x4013c8(0x1ea)][_0x4013c8(0x1c2)](),_0x471b70=document[_0x4013c8(0x1c4)](_0x4013c8(0x1fa));_0x471b70['forEach'](_0x146fc1=>{const _0xe4ff8d=_0x4013c8,_0x27725a=_0x146fc1[_0xe4ff8d(0x1dc)][_0xe4ff8d(0x1c2)]();_0x146fc1[_0xe4ff8d(0x1d7)]['display']=_0x27725a[_0xe4ff8d(0x1ec)](_0x494983)?_0xe4ff8d(0x1e0):'none';}),_0x59561f(_0x494983);}_0x4f7be5?.[_0x38abda(0x1d5)]('click',_0x1b9af4),_0x5dd82b?.[_0x38abda(0x1d5)](_0x38abda(0x1f8),_0x1b9af4);}));function toggleTheme(){const _0x34c9d6=_0x1d8f;document[_0x34c9d6(0x1e1)][_0x34c9d6(0x1f2)][_0x34c9d6(0x1d6)](_0x34c9d6(0x1f4));const _0x285a5f=document[_0x34c9d6(0x1e1)]['classList'][_0x34c9d6(0x1cf)]('light-mode');localStorage[_0x34c9d6(0x1cb)](_0x34c9d6(0x1ce),_0x285a5f?'light':_0x34c9d6(0x1c8));}
     </script>
 </body>
