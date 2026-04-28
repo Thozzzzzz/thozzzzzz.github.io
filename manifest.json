@@ -1,0 +1,56 @@
+{
+  "name": "Portfolio Photographe",
+  "short_name": "Portfolio",
+  "description": "Portfolio de photographie professionnelle",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["photography", "portfolio", "art"],
+  "shortcuts": [
+    {
+      "name": "Galerie",
+      "url": "/#work",
+      "description": "Voir la galerie de photos"
+    },
+    {
+      "name": "À propos",
+      "url": "/#about",
+      "description": "En savoir plus"
+    },
+    {
+      "name": "Contact",
+      "url": "/#contact",
+      "description": "Me contacter"
+    }
+  ]
+}
